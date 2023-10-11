@@ -3,7 +3,7 @@
  */
 
 /**
- * @param {string} str выражение
+ * @param {string} str გამოხატულება
  *
  * @constructor
  */
@@ -16,7 +16,7 @@ function Expression(str) {
      */
     this.tokenize = function (str) {
         str = ' ' + str + ' ';
-        str = str.replace(/ not /g, '  not  '); // пока так (чтобы not мог прилипать ко всему)
+        str = str.replace(/ not /g, '  not  '); // ჯერ ასე)
         return str.split(/(".+?"|'.+?'| AND | OR | NOT |\|\||&&|<>|!=|==|<=|>=|\+|\-|\*|\/|>|<|=|\(|\))/gi);
     };
 
