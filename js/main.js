@@ -80,9 +80,9 @@ $(function() {
                         qst.push(file);
                     }
                 } else if (file.name.split('.').pop().toLowerCase() == 'css') {
-                    $('#additionalstyle').find('style').append(file.asBinary());
+                    $('#additionalstyle').find('style').appendfile.asText();
                 } else if (file.name.split('.').pop().toLowerCase() == 'js') {
-                    eval(win2unicode(file.asBinary())); // todo?
+                    evalfile.asText(); // todo?
                 } else {
                     files[file.name] = URL.createObjectURL(new Blob([(file.asArrayBuffer())], {type: MIME[file.name.split('.').pop()]}));
                 }
@@ -103,9 +103,9 @@ $(function() {
             }
 
             for (var i = 0; i < qst.length; i++) {
-                quest = quest + '\r\n' + win2unicode(qst[i].asBinary());
+                
+     quest = quest + '\r\n' + qst[i].asText();
             }
-
             start(quest, name);
         }
     }
@@ -130,7 +130,7 @@ $(function() {
                 );
             }
         }).fail(function() {
-            $('.gamelist').text('Не удалось загрузить список квестов. Скорее всего у вас браузер на основе хромиума (хром, опера, яндекс-браузер и д.р.) и вы запустили веб урку локально. Безопасность хромиума запрещает обращаться к каким бы то не было локальным файлам и считывать их автоматически. Это исправляется если запустить хром с флагом "--allow-file-access-from-files". В вебе такой проблемы ни у кого не будет, речь только о локальной работе. Вы всё ещё можете выбрать файлы игры вручную из папки quests и поиграть.')
+            $('.gamelist').text('ვერ ჩაიტვირთა თამაშები.')
         });
 
         $('#loading').hide();
@@ -162,7 +162,7 @@ $(function() {
                 mode = $('#urq_mode').val();
                 loadZip(reader.result, zip.name);
             };
-            reader.readAsBinaryString(zip, 'CP1251');
+            reader.readAsBinaryString(zip, 'UTF8');
 
             return;
         }
@@ -213,7 +213,7 @@ $(function() {
             }
         };
 
-        reader.readAsText(file, 'CP1251');
+        reader.readAsText(file, 'UTF8');
     }
 
     /**
@@ -238,7 +238,7 @@ $(function() {
             $('#additionalstyle').find('style').append(style.result);
         };
 
-        style.readAsText(file, 'CP1251');
+        style.readAsText(file, 'UTF8');
     }
 
     /**
@@ -250,14 +250,14 @@ $(function() {
             eval(script.result); // todo?
         };
 
-        script.readAsText(file, 'CP1251');
+        script.readAsText(file, 'UTF8');
     }
 
     /**
      * Запуск
      *
-     * @param {String} msg тело квеста
-     * @param {String} name имя игры или файла
+     * @param {String} msg კვესტის სხეული
+     * @param {String} name თამაშის სახელი
      */
     function start(msg, name) {
         quest = null;
@@ -265,11 +265,13 @@ $(function() {
             return 'confirm please';
         };
 
-        $('#loading').hide();
         $('#infopanel').hide();
         $('#logo').hide();
 
-        Game = new Quest(msg);
+
+
+
+	        Game = new Quest(msg);
         Game.name = name;
 
         Game.init();
