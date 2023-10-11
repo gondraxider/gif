@@ -27,7 +27,7 @@ $(function() {
             var lsname = localStorage.getItem(Game.name + '_' + i + '_name');
 
             if (lsname === null) {
-                btn.text('(Пустой слот сохранения)');
+                btn.text('(შენახვის ცარიელი ადგილი)');
             } else {
                 btn.text(lsname);
             }
@@ -62,7 +62,7 @@ $(function() {
             lsname = localStorage.getItem(Game.name + '_' + i + '_name');
 
             if (lsname === null) {
-                btn.text('(Пустой слот сохранения)').prop('disabled', true);
+                btn.text('(შენახვის ცარიელი ადგილი)').prop('disabled', true);
             } else {
                 btn.text(lsname);
             }
@@ -113,19 +113,19 @@ $(function() {
         var span = $(this).find('span.glyphicon');
 
         if (volume == 1) {
-            span.find('span.sr-only').text('Выключить звук');
+            span.find('span.sr-only').text('ხმის გათიშვა');
             volume = 2;
             gameMusic.volume = 0.5;
             span.removeClass('glyphicon-volume-up');
             span.addClass('glyphicon-volume-down');
         } else if (volume == 2) {
-            span.find('span.sr-only').text('Вернуть громкость 100%');
+            span.find('span.sr-only').text('ხმის დაბრუნება');
             volume = 3;
             gameMusic.volume = 0;
             span.removeClass('glyphicon-volume-down');
             span.addClass('glyphicon-volume-off');
         } else if (volume == 3) {
-            span.find('span.sr-only').text('Убавить звук');
+            span.find('span.sr-only').text('ხმის დაკლება');
             volume = 1;
             gameMusic.volume = 1;
             span.removeClass('glyphicon-volume-off');
@@ -136,7 +136,7 @@ $(function() {
     });
 
     $('#restart').on('click', function () {
-        if (confirm('Перезапустить игру?')) {
+        if (confirm('გადაიტვირთოს თამაში?')) {
 //            GlobalPlayer.status = PLAYER_STATUS_END;
             $('#info').hide();
             $('#input').hide();
@@ -238,7 +238,7 @@ $(function() {
         }
     });
 
-    $(document).keydown(function(e){
+    $(document).keypress(function(e){
         if (GlobalPlayer.status == PLAYER_STATUS_END) {
             if (e.keyCode == 13) {
                 buttonField.find('button').each(function(index) {
@@ -252,7 +252,7 @@ $(function() {
         if (GlobalPlayer.status == PLAYER_STATUS_ANYKEY) {
             $('#info').hide();
             buttonField.show();
-            GlobalPlayer.anykeyAction(e.keyCode);
+            GlobalPlayer.anykeyAction(e.charCode);
         }
     });
 
@@ -263,7 +263,7 @@ $(function() {
         if (GlobalPlayer.status == PLAYER_STATUS_ANYKEY) {
             $('#info').hide();
             buttonField.show();
-            GlobalPlayer.anykeyAction(e.keyCode);
+            GlobalPlayer.anykeyAction(e.charCode);
         }
     });
 
