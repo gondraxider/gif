@@ -4,14 +4,14 @@
 
 
 /**
- * @param {string} text тело игры
+ * @param {string} text თამაშის სხეული
  *
  * @constructor
  */
 function Quest(text) {
 
     /**
-     * @type {string} имя игры или файла для сохранения
+     * @type {string} თამაშის სახელი
      */
     this.name = '';
 
@@ -224,16 +224,11 @@ Quest.prototype.getVar = function(variable) {
         return Math.floor(Math.random() * parseInt(variable.substr(3))) + 1;
     }
 
-    if (variable == 'time') {
-        var Datetime = new Date();
-        return Datetime.getHours() * 3600 + Datetime.getMinutes() * 60 + Datetime.getSeconds();
-    }
-
     // Для выражений вроде "1 деньги"
     if (variable.split(' ').length > 1) {
         var count = variable.split(' ')[0];
         if (!isNaN(count)) {
-            variable = variable.split(' ').slice(1).join(' ').trim();
+            variable = variable.split(' ').slice(1).join(' ').trim()
             return this.vars[variable] >= count;
         }
     }
