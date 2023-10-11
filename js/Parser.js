@@ -27,7 +27,7 @@ Parser.prototype.parse = function(line) {
         var els;
         var ifline = line;
 
-        // todo переделать на обратную польскую
+        // todo გადავაკეთოთ
         if (ifline.indexOf(' if ') != -1) {
             ifline = ifline.substring(0, ifline.indexOf(' if ') + 1)
         }
@@ -132,13 +132,7 @@ Parser.prototype.parse = function(line) {
             return GlobalPlayer.btn(btn[0].trim(), btn.slice(1).join(',').trim());
         //рудименты далее
         case 'tokens':
-            var reg;
-
-            if (Game.getVar('tokens_delim') == 'char') {
-                reg = '';
-            } else {
-                reg = new RegExp('[' + (Game.getVar('tokens_delim')).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + ']', 'gi');
-            }
+            var reg = new RegExp('[' + ((Game.getVar('tokens_delim') == 'char') ? '' : Game.getVar('tokens_delim')).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + ']', 'gi');
 
             var str = (new Expression(command.trim())).calc().split(reg);
 
